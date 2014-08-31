@@ -2,17 +2,17 @@ class KMP:
     """docstring for KMP"""
     def getNext(self, s):
         n = len(s)
-        a, pos, cnd = n * [0], 0, -1
+        a, i, j = n * [0], 0, -1
         a[0] = -1
-        while pos < n - 1:
-            if cnd == -1 or s[pos] == s[cnd]:
-                cnd, pos = cnd + 1, pos + 1
-                if s[pos] != s[cnd]:
-                    a[pos] = cnd
+        while i < n - 1:
+            if j == -1 or s[i] == s[j]:
+                i, j = i + 1, j + 1
+                if s[i] != s[j]:
+                    a[i] = j
                 else:
-                    a[pos] = a[cnd]
+                    a[i] = a[j]
             else:
-                cnd = a[cnd]
+                j = a[j]
         return a
     def match(self, s, p):
         a, i, j = self.getNext(p), 0, 0
